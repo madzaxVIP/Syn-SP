@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syn SP APK.</title>
+<meta name="description" content="Download Syn SP APK resmi.">
+<style>
+  :root{
+    --bg:#050505;
+    --panel:#0e0e0f;
+    --line:#26262a;
+    --silver:#c0c0c8;
+    --silver-hi:#f2f2f5;
+    --muted:#8a8a93;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--silver-hi);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;
+    overflow-x:hidden;min-height:100vh;
+  }
+  body.locked{overflow:hidden}
+  #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+  /* ===== INTRO ===== */
+  #intro{
+    position:fixed;inset:0;z-index:100;background:#000;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity .8s ease, visibility .8s ease, transform .9s cubic-bezier(.7,0,.2,1);
+  }
+  #intro.hide{opacity:0;visibility:hidden;transform:scale(1.15)}
+  #intro::before{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);
+    animation:scan 6s linear infinite;pointer-events:none;
+  }
+  @keyframes scan{to{background-position:0 60px}}
+  .intro-title{
+    font-size:clamp(2.6rem,12vw,7rem);font-weight:900;letter-spacing:.12em;
+    display:flex;gap:.04em;text-transform:uppercase;
+  }
+  .intro-title span{
+    display:inline-block;opacity:0;transform:translateY(60px) scale(.6) rotateX(90deg);
+    background:linear-gradient(180deg,#fff 0%,#c0c0c8 50%,#6d6d75 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:letterIn .7s cubic-bezier(.2,1.2,.3,1) forwards;
+  }
+  .intro-title span.gap{width:.35em}
+  @keyframes letterIn{to{opacity:1;transform:none}}
+  .intro-title.glitch{animation:glitch .6s steps(2) 1}
+  @keyframes glitch{
+    0%{transform:translate(0)}
+    20%{transform:translate(-6px,2px);text-shadow:4px 0 #fff,-4px 0 #555}
+    40%{transform:translate(6px,-3px);text-shadow:-4px 0 #fff,4px 0 #555}
+    60%{transform:translate(-3px,3px)}
+    80%{transform:translate(4px,-2px);text-shadow:3px 0 #fff,-3px 0 #555}
+    100%{transform:none;text-shadow:none}
+  }
+  .intro-sub{
+    margin-top:14px;font-size:.8rem;letter-spacing:.7em;color:var(--muted);
+    text-transform:uppercase;opacity:0;animation:fade 1s 1.6s forwards;
+  }
+  @keyframes fade{to{opacity:1}}
+  .bar{
+    margin-top:36px;width:min(280px,70vw);height:2px;background:#1b1b1e;overflow:hidden;
+    opacity:0;animation:fade .5s 1.2s forwards;
+  }
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#555,#fff,#555);
+    animation:load 1.9s 1.3s cubic-bezier(.6,0,.3,1) forwards}
+  @keyframes load{to{width:100%}}
+
+  /* ===== MAIN ===== */
+  main{position:relative;z-index:2;opacity:0;transition:opacity 1s .2s}
+  main.show{opacity:1}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+  .logo{font-weight:900;letter-spacing:.2em;font-size:.95rem;
+    background:linear-gradient(90deg,#fff,#9a9aa3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tag{font-size:.7rem;letter-spacing:.2em;color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:99px}
+
+  .hero{text-align:center;padding:70px 0 80px}
+  .badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.25em;color:var(--silver);
+    border:1px solid var(--line);padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.02);text-transform:uppercase}
+  .dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
+  h1{
+    margin:26px 0 16px;font-size:clamp(2.4rem,9vw,5rem);font-weight:900;line-height:1;letter-spacing:-.01em;
+    background:linear-gradient(110deg,#6d6d75 0%,#fff 25%,#c0c0c8 45%,#fff 60%,#6d6d75 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 4s linear infinite;
+  }
+  @keyframes shine{to{background-position:-250% 0}}
+  .lead{color:var(--muted);max-width:480px;margin:0 auto 42px;line-height:1.7;font-size:1rem}
+
+  .app-card{
+    margin:0 auto;max-width:420px;padding:34px 28px;border-radius:24px;
+    background:linear-gradient(160deg,#141416,#0a0a0b);border:1px solid var(--line);
+    position:relative;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);
+    animation:float 5s ease-in-out infinite;
+  }
+  @keyframes float{50%{transform:translateY(-8px)}}
+  .app-card::before{
+    content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;
+    background:conic-gradient(from var(--a,0deg),transparent 0 70%,#fff 85%,transparent 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;animation:spin 4s linear infinite;
+  }
+  @property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+  @keyframes spin{to{--a:360deg}}
+  .icon{
+    width:84px;height:84px;margin:0 auto 18px;border-radius:22px;display:grid;place-items:center;
+    background:linear-gradient(145deg,#f5f5f8,#7d7d86);color:#000;font-weight:900;font-size:1.6rem;letter-spacing:.05em;
+    box-shadow:0 10px 30px rgba(255,255,255,.12);
+  }
+  .app-card h2{font-size:1.4rem;letter-spacing:.04em}
+  .meta{display:flex;justify-content:center;gap:10px;margin:14px 0 26px;flex-wrap:wrap}
+  .meta span{font-size:.72rem;color:var(--silver);border:1px solid var(--line);padding:5px 11px;border-radius:99px}
+
+  .btn{
+    position:relative;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
+    padding:18px;border-radius:16px;text-decoration:none;font-weight:800;letter-spacing:.12em;font-size:.95rem;
+    color:#000;background:linear-gradient(135deg,#fff,#b5b5bd 55%,#f2f2f5);
+    overflow:hidden;transition:transform .2s, box-shadow .3s;
+    box-shadow:0 8px 30px rgba(255,255,255,.18);text-transform:uppercase;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 44px rgba(255,255,255,.3)}
+  .btn:active{transform:scale(.98)}
+  .btn::after{
+    content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent);
+    transform:skewX(-20deg);animation:sweep 2.8s infinite;
+  }
+  @keyframes sweep{to{left:140%}}
+  .btn svg{width:20px;height:20px;animation:bob 1.4s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(3px)}}
+  .note{margin-top:14px;font-size:.72rem;color:var(--muted)}
+
+  /* ===== FAQ ===== */
+  section.faq{padding:40px 0 90px}
+  .sec-title{text-align:center;margin-bottom:34px}
+  .sec-title small{letter-spacing:.4em;color:var(--muted);font-size:.7rem}
+  .sec-title h3{font-size:clamp(1.6rem,5vw,2.3rem);margin-top:8px;
+    background:linear-gradient(90deg,#fff,#9a9aa3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .item{
+    border:1px solid var(--line);background:rgba(14,14,15,.8);border-radius:16px;margin-bottom:12px;
+    overflow:hidden;backdrop-filter:blur(6px);transition:border-color .3s, background .3s;
+  }
+  .item:hover{border-color:#44444b}
+  .item.open{border-color:#8a8a93;background:#121214}
+  .q{
+    width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:20px 22px;background:none;border:none;color:var(--silver-hi);
+    font:600 1rem inherit;font-family:inherit;text-align:left;cursor:pointer;
+  }
+  .plus{
+    flex:0 0 32px;height:32px;border-radius:50%;border:1px solid #44444b;position:relative;
+    transition:transform .4s cubic-bezier(.3,1.4,.5,1),background .3s,border-color .3s;
+  }
+  .plus::before,.plus::after{content:"";position:absolute;top:50%;left:50%;background:var(--silver);
+    transform:translate(-50%,-50%);transition:.3s}
+  .plus::before{width:12px;height:2px}
+  .plus::after{width:2px;height:12px}
+  .item.open .plus{transform:rotate(135deg);background:#fff;border-color:#fff}
+  .item.open .plus::before,.item.open .plus::after{background:#000}
+  .a{max-height:0;overflow:hidden;transition:max-height .45s ease}
+  .a p{padding:0 22px 22px;color:var(--muted);line-height:1.75;font-size:.95rem}
+
+  footer{text-align:center;padding:30px 0 50px;color:#55555c;font-size:.75rem;letter-spacing:.2em;border-top:1px solid #151517}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:.8s}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body class="locked">
+
+<canvas id="bg"></canvas>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-title" id="introTitle"></div>
+  <div class="intro-sub">Download Center</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<main id="main">
+  <div class="wrap">
+    <nav>
+      <div class="logo">SYN SP</div>
+      <div class="tag">ANDROID APK</div>
+    </nav>
+
+    <header class="hero">
+      <div class="badge reveal"><span class="dot"></span> Versi terbaru tersedia</div>
+      <h1 class="reveal">SYN SP</h1>
+      <p class="lead reveal">Unduh aplikasi Syn SP official.tersedia di android</p>
+
+      <div class="app-card reveal">
+        <div class="icon">SP</div>
+        <h2>Download Syn SP</h2>
+        <div class="meta">
+          <span>Android</span>
+          <span>APK</span>
+          <span>Gratis</span>
+        </div>
+
+        <!-- GANTI href DI BAWAH DENGAN LINK APK KAMU -->
+        <a class="btn" id="dl" href="https://www.mediafire.com/file/qupvg8iesu9klia/ppsspp-Syn.apk/file" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>
+          Download APK
+        </a>
+        <div class="note">Pastikan izinkan "Install dari sumber tidak dikenal" di HP kamu.</div>
+      </div>
+    </header>
+
+    <section class="faq">
+      <div class="sec-title reveal">
+        <small>Gamer Pro</small>
+        <h3>FAQ</h3>
+      </div>
+
+      <div class="item reveal">
+        <button class="q">Apa itu Syn SP? <span class="plus"></span></button>
+        <div class="a"><p>Syn SP adalah apk emulator Playstation Portable android yang sudah di modifikasi.</p></div>
+      </div>
+
+      <div class="item reveal">
+        <button class="q">Bagaimana cara install APK-nya? <span class="plus"></span></button>
+        <div class="a"><p>Tekan tombol Download APK, tunggu sampai selesai, lalu buka file yang terunduh. Jika diminta, aktifkan izin "Install dari sumber tidak dikenal" di pengaturan HP, lalu lanjutkan instalasi.</p></div>
+      </div>
+
+      <div class="item reveal">
+        <button class="q">Apakah aman dan gratis? <span class="plus"></span></button>
+        <div class="a"><p>File APK ini disediakan langsung oleh pembuatnya melalui halaman resmi ini. Unduh hanya dari sini, bukan dari link pihak lain, supaya file tetap aman.</p></div>
+      </div>
+
+      <div class="item reveal">
+        <button class="q">Kenapa muncul peringatan saat install? <span class="plus"></span></button>
+        <div class="a"><p>Peringatan itu muncul karena aplikasi tidak dipasang lewat Play Store. Itu hal yang normal untuk semua file APK di luar toko aplikasi.</p></div>
+      </div>
+
+      <div class="item reveal">
+        <button class="q">Aplikasi tidak bisa dibuka, harus bagaimana? <span class="plus"></span></button>
+        <div class="a"><p>Coba hapus aplikasi lalu install ulang, pastikan versi Android kamu mendukung, dan ruang penyimpanan cukup.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <footer>© <span id="yr"></span> SYN SP — ALL RIGHTS RESERVED</footer>
+</main>
+
+<script>
+  // ===== Intro letters =====
+  const text = "SYN SP";
+  const title = document.getElementById('introTitle');
+  [...text].forEach((ch,i)=>{
+    const s = document.createElement('span');
+    if(ch===' '){ s.className='gap'; s.innerHTML='&nbsp;'; }
+    else s.textContent = ch;
+    s.style.animationDelay = (0.2 + i*0.12) + 's';
+    title.appendChild(s);
+  });
+  setTimeout(()=>title.classList.add('glitch'), 1100);
+
+  const intro = document.getElementById('intro');
+  const main = document.getElementById('main');
+  setTimeout(()=>{
+    intro.classList.add('hide');
+    main.classList.add('show');
+    document.body.classList.remove('locked');
+    revealCheck();
+  }, 3600);
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ===== FAQ =====
+  document.querySelectorAll('.item').forEach(item=>{
+    const btn = item.querySelector('.q');
+    const ans = item.querySelector('.a');
+    btn.addEventListener('click',()=>{
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.item.open').forEach(o=>{
+        o.classList.remove('open'); o.querySelector('.a').style.maxHeight = 0;
+      });
+      if(!open){
+        item.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ===== Scroll reveal =====
+  const els = document.querySelectorAll('.reveal');
+  function revealCheck(){
+    els.forEach((el,i)=>{
+      const r = el.getBoundingClientRect();
+      if(r.top < innerHeight - 40 && !el.classList.contains('in')){
+        setTimeout(()=>el.classList.add('in'), i%4*90);
+      }
+    });
+  }
+  addEventListener('scroll', revealCheck);
+  addEventListener('resize', revealCheck);
+
+  // ===== Background particles =====
+  const c = document.getElementById('bg'), x = c.getContext('2d');
+  let W,H,pts=[];
+  function size(){
+    W=c.width=innerWidth; H=c.height=innerHeight;
+    pts = Array.from({length: Math.min(70, Math.floor(W/18))},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.6+.4
+    }));
+  }
+  size(); addEventListener('resize',size);
+  (function draw(){
+    x.clearRect(0,0,W,H);
+    pts.forEach((p,i)=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      x.fillStyle='rgba(220,220,230,.55)';
+      x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<120){
+          x.strokeStyle='rgba(200,200,210,'+(.12*(1-d/120))+')';
+          x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke();
+        }
+      }
+    });
+    requestAnimationFrame(draw);
+  })();
+</script>
+</body>
+</html>
